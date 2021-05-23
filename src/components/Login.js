@@ -11,11 +11,10 @@ import {
     FormFeedback,
     Spinner,
 } from 'reactstrap';
-// import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
 import { loginAction } from '../redux/actions/loginAction';
 import { withRouter } from 'react-router-dom';
-import '../assets/css/login.css';
+import '../assets/scss/index.scss';
 
 export class Login extends Component {
     constructor(props) {

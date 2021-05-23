@@ -8,14 +8,10 @@ export const loginAction = (data, history) => async (dispatch) => {
 
         const res = await axios.post('https://reports-backend.herokuapp.com/api/v1/users/login', data)
         const user = await res.data;
-        console.log(user)
         localStorage.setItem('token', user.token)
         localStorage.setItem('role', user.user.role);
 
-        // const token = JSON.parse(localStorage.getItem('token'));
-        // const getRole = role.role
         if (user) {
-            console.log(true)
             history.push('/reports')
         }
         return dispatch(loginSuccess(user));
