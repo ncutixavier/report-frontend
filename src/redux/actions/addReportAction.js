@@ -13,6 +13,9 @@ export const addReportAction = (data) => async (dispatch) => {
                 'Authorization': token,
             }
         })
+        if (res) {
+            window.location.reload()
+        }
         return dispatch(addReportSuccess(res))
     } catch (error) {
         if (error.response) {
