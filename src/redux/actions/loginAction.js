@@ -10,6 +10,7 @@ export const loginAction = (data, history) => async (dispatch) => {
         const user = await res.data;
         localStorage.setItem('token', user.token)
         localStorage.setItem('role', user.user.role);
+        localStorage.setItem('id', user.user._id);
 
         if (user) {
             history.push('/reports')

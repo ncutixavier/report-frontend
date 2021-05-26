@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button, Alert, Modal, ModalHeader, ModalFooter, Progress } from 'reactstrap';
 import { connect } from 'react-redux';
 import { reportAction } from '../redux/actions/reportAction';
+import AddReport from './AddReport'
 import '../assets/scss/index.scss';
 
 export class Report extends Component {
@@ -10,14 +11,20 @@ export class Report extends Component {
         super(props);
         this.state = {
             showHide: false,
+            showAdd: false,
             doc: ''
         }
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleModalShowAdd = this.handleModalShowAdd.bind(this);
     }
 
     handleModalShowHide(doc) {
         this.setState({ showHide: !this.state.showHide })
         this.setState({ doc: doc })
+    }
+
+    handleModalShowAdd() {
+        this.setState({ showAdd: !this.state.showAdd })
     }
 
     componentDidMount() {
@@ -32,6 +39,7 @@ export class Report extends Component {
     render() {
         const token = localStorage.getItem('token');
         const role = localStorage.getItem("role");
+
         if (token)
             return (
                 <div>
@@ -39,9 +47,9 @@ export class Report extends Component {
                         <h2 className='title'>Error Handling</h2>
                         <div className='items'>
                             {role === 'admin' ? (
-                                <Button color='primary'>Add Report</Button>
-                            ): ''}
-                            
+                                <Button color='primary' onClick={this.handleModalShowAdd}>Add Report</Button>
+                            ) : ''}
+
                             <Button outline color='danger' onClick={this.handleLogout}>
                                 Logout
               </Button>
@@ -146,6 +154,10 @@ export class Report extends Component {
 
                         </Row>
                     </Container>
+                    <AddReport
+                        isOpen={this.state.showAdd}
+                        onClick={() => this.handleModalShowAdd()}
+                    />
                 </div>
             );
         else
